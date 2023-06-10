@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="pages/index.css">
+</head>
+<body class="root">
+  <div class="page">
+    <header class="header">
+      <img src="images/header-logo.svg" alt="Лого." class="header__logo">
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img src="images/profile-avatar.jpg" alt="Аватар." class="profile__avatar">
+        <div class="profile__info">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <button class=" btn profile__edit-btn"></button>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="btn profile__add-btn"></button>
+      </section>
+      <section class="elements" aria-label="Секция со статьями">
+        <article class="element">
+          <img src="images/element-bahamas.jpg" alt="Акула." class="element__photo">
+          <div class="element__footer">
+            <h2 class="element__title">Багамские острова</h2>
+            <button class="element__like-btn"></button>
+          </div>
+        </article>
+        <div class="element">
+          <img src="images/element-red-1.jpg" alt="Рифы." class="element__photo">
+          <div class="element__footer">
+            <h2 class="element__title">Красное море</h2>
+            <button class="element__like-btn"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img src="images/element-hawaii.jpg" alt="Черепаха." class="element__photo">
+          <div class="element__footer">
+            <h2 class="element__title">Гавайские острова</h2>
+            <button class="element__like-btn"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img src="images/element-micronesia.jpg" alt="Риф." class="element__photo">
+          <div class="element__footer">
+            <h2 class="element__title">Микронезия</h2>
+            <button class="element__like-btn"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img src="images/element-thailand.jpg" alt="Риф." class="element__photo">
+          <div class="element__footer">
+            <h2 class="element__title">Тайланд</h2>
+            <button class="element__like-btn"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img src="images/element-red-2.jpg" alt="Рифы." class="element__photo">
+          <div class="element__footer">
+            <h2 class="element__title">Красное море</h2>
+            <button class="element__like-btn"></button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+    </footer>
+    <div class="popup">
+      <div class="popup__container">
+        <form action="" class="popup__form">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input type="text" required class="popup__form-item popup__form-item_el_title">
+          <input type="text" required class="popup__form-item popup__form-item_el_subtitle">
+          <button type="submit" class="popup__save-btn">Сохранить</button>
+        </form>
+        <button class="btn popup__close-btn"></button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

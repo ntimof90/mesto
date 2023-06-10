@@ -1,0 +1,7 @@
+.root {
+  background-color: #000;
+  font-family: "Inter", Arial;
+  color: #fff;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
