@@ -10,6 +10,6 @@
     grid-template-areas:
     ". name btn"
     ". job .";
-    gap: 10px 10px
+    gap: 10px 10px;
   }
 }
