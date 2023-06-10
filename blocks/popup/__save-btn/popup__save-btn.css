@@ -17,6 +17,7 @@
   .popup__save-btn {
     width: 100%;
     font-size: 14px;
+    line-height: 1.21;
     margin: 45px 0 0;
   }
 }
