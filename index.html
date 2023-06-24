@@ -23,65 +23,52 @@
         <button type="button" class="btn profile__add-btn"></button>
       </section>
       <section class="elements" aria-label="Секция со статьями">
-        <article class="element">
-          <img src="images/element-bahamas.jpg" alt="Акула." class="element__photo">
-          <div class="element__footer">
-            <h2 class="element__title">Багамские острова</h2>
-            <button type="button" class="element__like-btn"></button>
-          </div>
-        </article>
-        <div class="element">
-          <img src="images/element-red-1.jpg" alt="Рифы." class="element__photo">
-          <div class="element__footer">
-            <h2 class="element__title">Красное море</h2>
-            <button type="button" class="element__like-btn"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/element-hawaii.jpg" alt="Черепаха." class="element__photo">
-          <div class="element__footer">
-            <h2 class="element__title">Гавайские острова</h2>
-            <button type="button" class="element__like-btn"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/element-micronesia.jpg" alt="Риф." class="element__photo">
-          <div class="element__footer">
-            <h2 class="element__title">Микронезия</h2>
-            <button type="button" class="element__like-btn"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/element-thailand.jpg" alt="Риф." class="element__photo">
-          <div class="element__footer">
-            <h2 class="element__title">Тайланд</h2>
-            <button type="button" class="element__like-btn"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/element-red-2.jpg" alt="Рифы." class="element__photo">
-          <div class="element__footer">
-            <h2 class="element__title">Красное море</h2>
-            <button type="button" class="element__like-btn"></button>
-          </div>
-        </div>
+        <template id="element">
+          <article class="element">
+            <button type="button" class="btn element__del-btn"></button>
+            <img src="//:0" class="element__photo">
+            <div class="element__footer">
+              <h2 class="element__title"></h2>
+              <button type="button" class="element__like-btn"></button>
+            </div>
+          </article>
+        </template>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_type_edit">
+        <div class="popup__container">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form action="" name="profileFormElement" class="popup__form">
+            <input type="text" name="nameInput" required class="popup__form-item popup__form-item_el_title">
+            <input type="text" name="jobInput" required class="popup__form-item popup__form-item_el_subtitle">
+            <button type="submit" class="popup__save-btn">Сохранить</button>
+          </form>
+          <button type="button" class="btn popup__close-btn"></button>
+        </div>
+    </div>
+    <div class="popup popup_type_add">
       <div class="popup__container">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form action="" name="formElement" class="popup__form">
-          <input type="text" name="nameInput" required class="popup__form-item popup__form-item_el_title">
-          <input type="text" name="jobInput" required class="popup__form-item popup__form-item_el_subtitle">
-          <button type="submit" class="popup__save-btn">Сохранить</button>
+        <h2 class="popup__title">Новое место</h2>
+        <form action="" name="cardFormElement" class="popup__form">
+          <input type="text" name="placeInput" placeholder="Название" required class="popup__form-item popup__form-item_el_title">
+          <input type="text" name="imageInput" placeholder="Ссылка на картинку" required class="popup__form-item popup__form-item_el_img">
+          <button type="submit" class="popup__save-btn">Создать</button>
         </form>
         <button type="button" class="btn popup__close-btn"></button>
       </div>
-    </div>
   </div>
+  <div class="popup popup_type_image">
+    <figure class="popup__figure">
+      <img class="popup__image" src="//:0">
+      <figcaption class="popup__figcaption"></figcaption>
+      <button type="button" class="btn popup__close-btn"></button>
+    </figure>
+  </div>
+  </div>
+  <script src="scripts/cards.js"></script>
   <script src="scripts/index.js"></script>
 </body>
 </html>
