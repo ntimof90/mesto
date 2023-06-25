@@ -38,10 +38,7 @@ function createCard (cardData) {
   const cardDeleteBtn = card.querySelector('.element__del-btn');
   cardPhoto.src = cardData.link;
   cardTitle.textContent = cardData.name;
-  cardPhoto.alt = cardData.alt;
-  if (cardPhoto.alt === 'undefined') {
-    cardPhoto.alt = cardData.name;
-  }
+  cardPhoto.alt = cardData.name;
   cardLikeBtn.addEventListener('click', () => {
     cardLikeBtn.classList.toggle('element__like-btn_active');
   });
@@ -50,8 +47,9 @@ function createCard (cardData) {
   });
   cardPhoto.addEventListener('click', () => {
     openPopup(imagePopup);
-    imagePopupFigure.src = cardPhoto.src;
-    imagePopupCaption.textContent = cardTitle.textContent;
+    imagePopupFigure.src = cardData.link;
+    imagePopupCaption.textContent = cardData.name;
+    imagePopupFigure.alt = cardData.name;
   });
   return card;
 }
