@@ -41,10 +41,12 @@
     <div class="popup popup_type_edit">
         <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form action="" name="profileFormElement" class="popup__form">
-            <input type="text" name="nameInput" required class="popup__form-item popup__form-item_el_title">
-            <input type="text" name="jobInput" required class="popup__form-item popup__form-item_el_subtitle">
-            <button type="submit" class="popup__save-btn">Сохранить</button>
+          <form action="" name="profileFormElement" novalidate class="popup__form">
+            <input type="text" name="nameInput" id="name-input" minlength="2" maxlength="40" required class="popup__form-item popup__form-item_el_title">
+            <span class="popup__form-error name-input-error"></span>
+            <input type="text" name="jobInput" id="job-input" minlength="2" maxlength="200" required class="popup__form-item popup__form-item_el_subtitle">
+            <span class="popup__form-error job-input-error"></span>
+            <button type="submit" class="popup__form-submit">Сохранить</button>
           </form>
           <button type="button" class="btn popup__close-btn"></button>
         </div>
@@ -52,10 +54,12 @@
     <div class="popup popup_type_add">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form action="" name="cardFormElement" class="popup__form">
-          <input type="text" name="placeInput" placeholder="Название" required class="popup__form-item popup__form-item_el_title">
-          <input type="text" name="imageInput" placeholder="Ссылка на картинку" required class="popup__form-item popup__form-item_el_img">
-          <button type="submit" class="popup__save-btn">Создать</button>
+        <form action="" name="cardFormElement" novalidate class="popup__form">
+          <input type="text" minlength="2" maxlength="30" name="placeInput" id="place-input" placeholder="Название" required class="popup__form-item popup__form-item_el_title">
+          <span class="popup__form-error place-input-error"></span>
+          <input type="url" name="imageInput" id="image-input" placeholder="Ссылка на картинку" required class="popup__form-item popup__form-item_el_img">
+          <span class="popup__form-error image-input-error"></span>
+          <button type="submit" class="popup__form-submit">Создать</button>
         </form>
         <button type="button" class="btn popup__close-btn"></button>
       </div>
@@ -70,5 +74,6 @@
   </div>
   <script src="scripts/cards.js"></script>
   <script src="scripts/index.js"></script>
+  <script src="scripts/validate.js"></script>
 </body>
 </html>
