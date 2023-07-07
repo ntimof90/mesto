@@ -39,6 +39,9 @@ function setEventListeners (formElement, validationSetup) {
     formElement.addEventListener('reset', () => {
       hideInputError(formElement, inputElement, validationSetup);
     });
+    formElement.addEventListener('submit', () => {
+      toggleButtonState(inputList, formSubmit, validationSetup);
+    });
   });
 }
 function hasInvalidInput (inputList) {
