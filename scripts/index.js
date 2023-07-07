@@ -16,8 +16,6 @@ const cardTemplate = document.querySelector('#element').content;
 const imagePopup = document.querySelector('.popup_type_image');
 const imagePopupFigure = imagePopup.querySelector('.popup__image');
 const imagePopupCaption = imagePopup.querySelector('.popup__figcaption');
-const popupList = document.querySelectorAll('.popup');
-
 
 function openPopup (item) {
   item.classList.add('popup_opened');
@@ -25,23 +23,19 @@ function openPopup (item) {
   item.addEventListener('mousedown', closePopupByOverlay);
 }
 function closePopupByEscape (evt) {
-  const openedPopup = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
       closePopup(openedPopup);
     }
 }
 function closePopupByOverlay (evt) {
-  const openedPopup = document.querySelector('.popup_opened');
   if(evt.target === evt.currentTarget) {
+    const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
 }
 function closePopup (item) {
   item.classList.remove('popup_opened');
-  const currentForm = item.querySelector('.popup__form');
-  if (currentForm !== null) {
-    currentForm.reset();
-  }
   document.removeEventListener('keydown', closePopupByEscape);
   item.removeEventListener('mousedown', closePopupByOverlay);
 }
@@ -85,16 +79,14 @@ function handleCardFormSubmit (evt) {
   closePopup(addPopup);
 }
 
-
-nameInput.value = profileTitle.textContent
-jobInput.value = profileSubtitle.textContent;
 initialCards.forEach((item) => {
   renderCard(item);
 });
 editButton.addEventListener('click', () => {
   openPopup(editPopup);
-  nameInput.value = profileTitle.textContent;
-  jobInput.value = profileSubtitle.textContent;
+  nameInput.defaultValue = profileTitle.textContent
+  jobInput.defaultValue = profileSubtitle.textContent;
+  profileFormElement.reset();
 });
 closeButtonList.forEach((item) => {
   item.addEventListener('click', () => {
@@ -104,5 +96,6 @@ closeButtonList.forEach((item) => {
 profileFormElement.addEventListener('submit', handleProfileFormSubmit);
 addButton.addEventListener('click', () => {
   openPopup(addPopup);
+  cardFormElement.reset();
 });
 cardFormElement.addEventListener('submit', handleCardFormSubmit);
