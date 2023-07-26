@@ -14,15 +14,15 @@ export class FormValidator {
     this._formElement.addEventListener('reset', () => {
       setTimeout(() => {
         this._toggleButtonState();
+        this._inputList.forEach((inputElement) => {
+          this._hideInputError(inputElement);
+        });
       }, 0);
     });
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
-      });
-      this._formElement.addEventListener('reset', () => {
-        this._hideInputError(inputElement);
       });
     });
   }

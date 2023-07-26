@@ -1,10 +1,10 @@
-import { openPopup } from './index.js';
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._isLiked = false;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
   _getTemplate() {
     const cardElement = document
@@ -14,43 +14,33 @@ export class Card {
     return cardElement;
   }
   _setEventListeners() {
-    this._element
-      .querySelector('.element__like-btn')
-      .addEventListener("click", () => {
+    this._likeButton.addEventListener("click", () => {
         this._like();
       });
-    this._element
-      .querySelector('.element__del-btn')
-      .addEventListener('click', () => {
+    this._deleteButton.addEventListener('click', () => {
         this._delete();
       });
-    this._element
-      .querySelector('.element__photo')
-      .addEventListener('click', () => {
-        this._toFullScreen();
+    this._cardImage.addEventListener('click', () => {
+        this._handleCardClick(this._name, this._link);
       });
   }
   _like() {
-    this._element
-      .querySelector('.element__like-btn')
-      .classList.toggle('element__like-btn_active');
+    this._likeButton.classList.toggle('element__like-btn_active');
     this._isLiked = !this._isLiked;
   }
   _delete() {
     this._element.remove();
   }
-  _toFullScreen() {
-    const imagePopup = document.querySelector('.popup_type_image');
-    openPopup(imagePopup);
-    imagePopup.querySelector('.popup__image').src = this._link;
-    imagePopup.querySelector('.popup__figcaption').textContent = this._name;
-    imagePopup.querySelector('.popup__image').alt = this._name;
-  }
   generateCard() {
     this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector('.element__photo');
+    this._cardTitle = this._element.querySelector('.element__title');
+    this._likeButton = this._element.querySelector('.element__like-btn');
+    this._deleteButton = this._element.querySelector('.element__del-btn');
+    this._cardImage.src = this._link;
+    this._cardTitle.textContent = this._name;
+    this._cardImage.alt = this._name;
     this._setEventListeners();
-    this._element.querySelector('.element__photo').src = this._link;
-    this._element.querySelector('.element__title').textContent = this._name;
     return this._element;
   }
 }
