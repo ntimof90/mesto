@@ -42,9 +42,9 @@
         <div class="popup__container">
           <h2 class="popup__title">Редактировать профиль</h2>
           <form action="" name="profile-form" novalidate class="popup__form">
-            <input type="text" name="nameInput" id="name-input" minlength="2" maxlength="40" placeholder="Имя" required class="popup__form-item popup__form-item_el_title">
+            <input type="text" name="name" id="name-input" minlength="2" maxlength="40" placeholder="Имя" required class="popup__form-item popup__form-item_el_title">
             <span class="popup__form-error name-input-error"></span>
-            <input type="text" name="jobInput" id="job-input" minlength="2" maxlength="200" placeholder="Вид деятельности" required class="popup__form-item popup__form-item_el_subtitle">
+            <input type="text" name="job" id="job-input" minlength="2" maxlength="200" placeholder="Вид деятельности" required class="popup__form-item popup__form-item_el_subtitle">
             <span class="popup__form-error job-input-error"></span>
             <button type="submit" class="popup__form-submit">Сохранить</button>
           </form>
@@ -55,25 +55,23 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <form action="" name="card-form" novalidate class="popup__form">
-          <input type="text" minlength="2" maxlength="30" name="placeInput" id="place-input" placeholder="Название" required class="popup__form-item popup__form-item_el_title">
+          <input type="text" minlength="2" maxlength="30" name="name" id="place-input" placeholder="Название" required class="popup__form-item popup__form-item_el_title">
           <span class="popup__form-error place-input-error"></span>
-          <input type="url" name="imageInput" id="image-input" placeholder="Ссылка на картинку" required class="popup__form-item popup__form-item_el_img">
+          <input type="url" name="link" id="image-input" placeholder="Ссылка на картинку" required class="popup__form-item popup__form-item_el_img">
           <span class="popup__form-error image-input-error"></span>
           <button type="submit" class="popup__form-submit">Создать</button>
         </form>
         <button type="button" class="btn popup__close-btn"></button>
       </div>
+    </div>
+    <div class="popup popup_type_image">
+      <figure class="popup__figure">
+        <img class="popup__image" src="//:0">
+        <figcaption class="popup__figcaption"></figcaption>
+        <button type="button" class="btn popup__close-btn"></button>
+      </figure>
+    </div>
   </div>
-  <div class="popup popup_type_image">
-    <figure class="popup__figure">
-      <img class="popup__image" src="//:0">
-      <figcaption class="popup__figcaption"></figcaption>
-      <button type="button" class="btn popup__close-btn"></button>
-    </figure>
-  </div>
-  </div>
-  <script type="module" src="scripts/index.js"></script>
-  <script type="module" src="scripts/Card.js"></script>
-  <script type="module" src="scripts/FormValidator.js"></script>
+  <script type="module" src="./pages/index.js"></script>
 </body>
 </html>

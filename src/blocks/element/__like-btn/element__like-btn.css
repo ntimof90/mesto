@@ -1,13 +1,13 @@
 .element__like-btn {
-  background: none;
-  border: none;
+  flex-shrink: 0;
   width: 22px;
   height: 19px;
-  flex-shrink: 0;
+  border: none;
   padding: 0;
+  background: none;
   background-image: url(../../../images/element-like.svg);
-  background-size: cover;
   background-position: center;
+  background-size: cover;
 }
 .element__like-btn:hover {
   opacity: .5;

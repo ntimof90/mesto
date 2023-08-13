@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
   constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
@@ -6,6 +6,7 @@ export class Card {
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
+
   _getTemplate() {
     const cardElement = document
       .querySelector(this._templateSelector)
@@ -13,6 +14,7 @@ export class Card {
       .cloneNode(true);
     return cardElement;
   }
+
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
         this._like();
@@ -24,13 +26,16 @@ export class Card {
         this._handleCardClick(this._name, this._link);
       });
   }
+
   _like() {
     this._likeButton.classList.toggle('element__like-btn_active');
     this._isLiked = !this._isLiked;
   }
+
   _delete() {
     this._element.remove();
   }
+  
   generateCard() {
     this._element = this._getTemplate();
     this._cardImage = this._element.querySelector('.element__photo');
