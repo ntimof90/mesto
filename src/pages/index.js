@@ -1,3 +1,10 @@
+import './index.css';
+import bahamasImage from '../images/element-bahamas.jpg';
+import redImage from '../images/element-red-1.jpg';
+import hawaiiImage from '../images/element-hawaii.jpg';
+import micronesiaImage from '../images/element-micronesia.jpg';
+import thaiImage from '../images/element-thailand.jpg';
+import redsImage from '../images/element-red-2.jpg';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -10,27 +17,27 @@ const addButton = document.querySelector('.profile__add-btn');
 const initialCards = [
   {
     name: 'Багамские острова',
-    link: 'images/element-bahamas.jpg',
+    link: bahamasImage,
   },
   {
     name: 'Красное море',
-    link: 'images/element-red-1.jpg',
+    link: redImage,
   },
   {
     name: 'Гавайские острова',
-    link: 'images/element-hawaii.jpg',
+    link: hawaiiImage,
   },
   {
     name: 'Микронезия',
-    link: 'images/element-micronesia.jpg',
+    link: micronesiaImage,
   },
   {
     name: 'Тайланд',
-    link: 'images/element-thailand.jpg',
+    link: thaiImage,
   },
   {
     name: 'Красное море',
-    link: 'images/element-red-2.jpg',
+    link: redsImage,
   }
 ];
 const validationConfig = {
@@ -58,9 +65,7 @@ const userInfo = new UserInfo({
 });
 const popupWithEditForm = new PopupWithForm({
     popupSelector: '.popup_type_edit',
-    handleFormSubmit: (formData) => {
-      userInfo.setUserInfo(formData);
-    }
+    handleFormSubmit: userInfo.setUserInfo.bind(userInfo)
   },
   setFormValidation
 );
