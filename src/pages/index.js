@@ -48,6 +48,7 @@ const validationConfig = {
   inputErrorClass: 'popup__form-item_invalid',
   errorClass: 'popup__form-error_active'
 };
+const forms = Array.from(document.querySelectorAll('.popup__form'));
 const cardList = new Section ( {
   items: initialCards,
   renderer: renderCard
@@ -56,8 +57,7 @@ const popupWithImage = new PopupWithImage({popupSelector: '.popup_type_image'});
 const popupWithAddForm = new PopupWithForm({
     popupSelector: '.popup_type_add',
     handleFormSubmit: renderCard
-  },
-  setFormValidation
+  }
 );
 const userInfo = new UserInfo({
   nameSelector: '.profile__title',
@@ -66,8 +66,7 @@ const userInfo = new UserInfo({
 const popupWithEditForm = new PopupWithForm({
     popupSelector: '.popup_type_edit',
     handleFormSubmit: userInfo.setUserInfo.bind(userInfo)
-  },
-  setFormValidation
+  }
 );
 
 function createCard(cardData) {
@@ -95,4 +94,7 @@ addButton.addEventListener('click', () => {
 });
 editButton.addEventListener('click', () => {
   popupWithEditForm.open(userInfo.getUserInfo());
+});
+forms.forEach((form) => {
+  setFormValidation(form);
 });
