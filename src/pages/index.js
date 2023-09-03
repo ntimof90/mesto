@@ -104,14 +104,16 @@ const popupWithImage = new PopupWithImage({
 const popupWithAddForm = new PopupWithForm({
   popupSelector: '.popup_type_add',
   handleFormSubmit: (formData) => {
-    popupWithEditForm._submitButton.textContent = 'Создание...';
-    popupWithEditForm._submitButton.classList.add('popup__form-submit_inactive');
+    popupWithAddForm._submitButton.textContent = 'Создание...';
+    popupWithAddForm._submitButton.classList.add('popup__form-submit_inactive');
     api.addCard(formData)
     .then((data) => {
       renderCard(data);
     })
     .finally(() => {
       popupWithAddForm.close();
+      popupWithAddForm._submitButton.textContent = 'Создать';
+      popupWithAddForm._submitButton.classList.remove('popup__form-submit_inactive');
     })
   }
 });
@@ -131,7 +133,7 @@ const popupWithConfirmation = new PopupWithConfirmation({
     .finally(() => {
       popupWithConfirmation.close();
       popupWithConfirmation._submitButton.textContent = "Да";
-      popupWithConfirmation._submitButton.classList.add('popup__form-submit_inactive');
+      popupWithConfirmation._submitButton.classList.remove('popup__form-submit_inactive');
     })
   }
 });
