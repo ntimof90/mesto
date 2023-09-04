@@ -7,6 +7,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import Api from '../components/Api.js';
+import { validationConfig } from '../utils/constants.js';
 
 const cards = {};
 
@@ -15,15 +16,6 @@ const editButton = document.querySelector('.profile__edit-btn');
 const addButton = document.querySelector('.profile__add-btn');
 
 const avatarButton = document.querySelector('.profile__avatar-button');
-
-const validationConfig = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__form-item',
-  submitButtonSelector: '.popup__form-submit',
-  inactiveButtonClass: 'popup__form-submit_inactive',
-  inputErrorClass: 'popup__form-item_invalid',
-  errorClass: 'popup__form-error_active'
-};
 
 const forms = Array.from(document.querySelectorAll('.popup__form'));
 
@@ -57,43 +49,27 @@ const api = new Api ({
 const popupWithEditForm = new PopupWithForm({
   popupSelector: '.popup_type_edit',
   handleFormSubmit: (formData) => {
-    popupWithEditForm._submitButton.textContent = 'Сохранение...';
-    popupWithEditForm._submitButton.classList.add('popup__form-submit_inactive');
-    api.editUserInfo({
-      name: formData.name,
-      about: formData.job
-    })
-    .then((data) => {
-      userInfo.setUserInfo(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-    .finally(() => {
-      popupWithEditForm.close();
-      popupWithEditForm._submitButton.textContent = 'Сохранить';
-      popupWithEditForm._submitButton.classList.remove('popup__form-submit_inactive');
-    });
+    function makeRequest() {
+      return api.editUserInfo({
+        name: formData.name,
+        about: formData.job
+      })
+      .then((data) => {
+        userInfo.setUserInfo(data);
+      });
+    }
+    handleSubmit(makeRequest, popupWithEditForm);
   }
 });
 
 const popupWithAvatarForm = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
   handleFormSubmit: (formData) => {
-    popupWithAvatarForm._submitButton.textContent = 'Сохранение...';
-    popupWithAvatarForm._submitButton.classList.add('popup__form-submit_inactive');
-    api.editAvatar({avatar: formData.avatar})
-    .then((data) => {
-      userInfo.setAvatar(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-    .finally(() => {
-      popupWithAvatarForm.close();
-      popupWithAvatarForm._submitButton.textContent = 'Сохранить';
-      popupWithAvatarForm._submitButton.classList.remove('popup__form-submit_inactive');
-    })
+    function makeRequest() {
+      return api.editAvatar({avatar: formData.avatar})
+      .then((data) => userInfo.setAvatar(data));
+    }
+    handleSubmit(makeRequest, popupWithAvatarForm);
   }
 });
 
@@ -104,37 +80,26 @@ const popupWithImage = new PopupWithImage({
 const popupWithAddForm = new PopupWithForm({
   popupSelector: '.popup_type_add',
   handleFormSubmit: (formData) => {
-    popupWithAddForm._submitButton.textContent = 'Создание...';
-    popupWithAddForm._submitButton.classList.add('popup__form-submit_inactive');
-    api.addCard(formData)
-    .then((data) => {
-      renderCard(data);
-    })
-    .finally(() => {
-      popupWithAddForm.close();
-      popupWithAddForm._submitButton.textContent = 'Создать';
-      popupWithAddForm._submitButton.classList.remove('popup__form-submit_inactive');
-    })
+    function makeRequest() {
+      return api.addCard(formData)
+      .then((data) => {
+        renderCard(data);
+      })
+    }
+    handleSubmit(makeRequest, popupWithAddForm, 'Создание...');
   }
 });
 
 const popupWithConfirmation = new PopupWithConfirmation({
   popupSelector: '.popup_type_delete',
   handleConfirmationSubmit: (cardId) => {
-    popupWithConfirmation._submitButton.textContent = "Подождите...";
-    popupWithConfirmation._submitButton.classList.add('popup__form-submit_inactive');
-    api.deleteCard({id: cardId})
-    .then(() => {
-      cards[cardId].delete();
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-    .finally(() => {
-      popupWithConfirmation.close();
-      popupWithConfirmation._submitButton.textContent = "Да";
-      popupWithConfirmation._submitButton.classList.remove('popup__form-submit_inactive');
-    })
+    function makeRequest() {
+      return api.deleteCard({id: cardId})
+      .then(() => {
+        cards[cardId].delete();
+      });
+    }
+    handleSubmit(makeRequest, popupWithConfirmation, 'Подождите...');
   }
 });
 
@@ -190,6 +155,20 @@ function setFormValidation(formElement) {
   formValidator.enableValidation();
 }
 
+function handleSubmit(request, popupInstance, loadingText = "Сохранение...") {
+  popupInstance.renderLoading(true, loadingText);
+  request()
+  .then(() => {
+    popupInstance.close();
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  .finally(() => {
+    popupInstance.renderLoading(false);
+  })
+}
+
 // УСТАНОВКА СЛУШАТЕЛЕЙ
 
 popupWithImage.setEventListeners();
@@ -209,18 +188,11 @@ avatarButton.addEventListener('click', () => {
 
 // ПОЛУЧЕНИЕ НАЧАЛЬНЫХ ДАННЫХ:
 
-api.getUserInfo()
-.then((data) => {
-  userInfo.setUserInfo(data);
-  userInfo.setAvatar(data);
-})
-.catch((error) => {
-  console.log(error);
-});
-
-api.getInitialCards()
-.then((data) => {
-  cardList.renderItems(data);
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then(([userData, cardsData]) => {
+  userInfo.setUserInfo(userData);
+  userInfo.setAvatar(userData);
+  cardList.renderItems(cardsData);
 })
 .catch((error) => {
   console.log(error);
